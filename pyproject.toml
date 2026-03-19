@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "LitePolis Team"}
+    {name = "NewJerseyStyle"}
 ]
 dependencies = [
     "fastapi>=0.100.0",
