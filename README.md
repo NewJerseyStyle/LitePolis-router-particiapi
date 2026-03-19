@@ -6,6 +6,29 @@ ParticiAPI-compatible router module for LitePolis.
 
 This module implements the [ParticiAPI](https://partici.app/) specification, providing a simpler alternative API for the ParticiApp frontend. It works alongside `LitePolis-router-default` (Polis API) and can be used interchangeably.
 
+## Installation
+
+```bash
+litepolis-cli deploy add-deps litepolis-router-particiapi
+litepolis-cli deploy sync-deps
+```
+
+## Configuration
+
+This module exports default configuration. To customize, create a config file:
+
+```bash
+litepolis-cli deploy init-config
+```
+
+Then edit `~/.litepolis/litepolis.config`:
+
+```ini
+[litepolis_router_particiapi]
+session_secret = your-secure-secret-key-here
+csrf_token_expire_hours = 24
+```
+
 ## ParticiAPI Endpoints
 
 | Endpoint | Method | Description |
@@ -28,24 +51,24 @@ This module implements the [ParticiAPI](https://partici.app/) specification, pro
 4. **Vote Values**: AGREE=-1, NEUTRAL=0, DISAGREE=1 (inverted from Polis)
 5. **Response Format**: Direct JSON objects vs PolisResponse wrapper
 
-## Installation
+## Quick Start
+
+1. Install all ParticiAPI modules:
+```bash
+litepolis-cli deploy add-deps litepolis-database-particiapi
+litepolis-cli deploy add-deps litepolis-router-particiapi
+litepolis-cli deploy add-deps litepolis-ui-particiapp
+litepolis-cli deploy sync-deps
+```
+
+2. Start LitePolis server:
+```bash
+litepolis-cli deploy serve
+```
+
+## Development Testing
 
 ```bash
 pip install -e .
-```
-
-## Usage
-
-```python
-from fastapi import FastAPI
-from litepolis_router_particiapi import router
-
-app = FastAPI()
-app.include_router(router, prefix="/api")
-```
-
-## Testing
-
-```bash
 pytest tests/
 ```

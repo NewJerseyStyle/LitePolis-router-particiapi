@@ -21,6 +21,7 @@ from datetime import datetime
 import hashlib
 import secrets
 import uuid
+import os
 
 from litepolis_database_particiapi import DatabaseActor
 from litepolis_database_particiapi.Actor import (
@@ -50,6 +51,22 @@ router = APIRouter()
 prefix = __name__.split('.')[-2]
 prefix = '_'.join(prefix.split('_')[2:])
 dependencies = []
+
+# Configuration defaults
+DEFAULT_CONFIG: Dict[str, Any] = {
+    "session_secret": "litepolis-particiapi-secret-change-in-production",
+    "csrf_token_expire_hours": 24,
+}
+
+# Get config with fallback to defaults
+try:
+    from litepolis import get_config
+    session_secret = get_config("litepolis_router_particiapi", "session_secret")
+    csrf_token_expire_hours = int(get_config("litepolis_router_particiapi", "csrf_token_expire_hours"))
+except (ValueError, Exception):
+    # Config actor not available yet, use defaults
+    session_secret = DEFAULT_CONFIG["session_secret"]
+    csrf_token_expire_hours = DEFAULT_CONFIG["csrf_token_expire_hours"]
 
 # Problem Details Types (RFC 7807)
 PROBLEM_TYPES = {

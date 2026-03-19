@@ -16,6 +16,6 @@ ParticiAPI Endpoints:
 - PUT /api/conversations/{conversation_id}/votes/{tid} - Submit vote
 """
 
-from .core import router, prefix, dependencies
+from .core import router, prefix, dependencies, DEFAULT_CONFIG
 
-__all__ = ["router", "prefix", "dependencies"]
+__all__ = ["router", "prefix", "dependencies", "DEFAULT_CONFIG"]
