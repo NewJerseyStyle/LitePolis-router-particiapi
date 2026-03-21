@@ -48,8 +48,8 @@ from litepolis_database_particiapi.Actor import (
 from litepolis_database_default import DatabaseActor as BaseActor
 
 router = APIRouter()
-prefix = __name__.split('.')[-2]
-prefix = '_'.join(prefix.split('_')[2:])
+# ParticiAPI routes should be at /api/* directly, not /api/particiapi/*
+prefix = ""  # Empty prefix so routes mount at /api/*
 dependencies = []
 
 # Configuration defaults
